@@ -1,0 +1,20 @@
+poll_interval_seconds: 2
+
+master:
+  bus: 5
+  name: "Dell P3425WE"
+
+profiles:
+  pc:
+    label: "PC (HDMI)"
+    trigger: 0x11
+    targets:
+      - { bus: 4, value: 0x11, name: "Acer → HDMI-1" }
+      - { bus: 3, value: 0x11, name: "Lenovo → HDMI-1" }
+
+  laptop:
+    label: "Laptop (USB-C)"
+    trigger: 0x1B
+    targets:
+      - { bus: 4, value: 0x12, name: "Acer → HDMI-2" }
+      - { bus: 3, value: 0x0F, name: "Lenovo → DP" }

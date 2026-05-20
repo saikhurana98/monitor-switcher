@@ -1,0 +1,60 @@
+[package]
+name = "monitor-switcher"
+version = "0.1.0"
+edition = "2021"
+authors = ["Sai Khurana <sai.khurana98@ashoka.edu.in>"]
+description = "Auto-switch secondary monitor inputs based on a master DDC/CI display's active source. Polls VCP 0x60 and writes target inputs to secondary monitors when the master changes."
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/saikhurana98/monitor-switcher"
+homepage = "https://github.com/saikhurana98/monitor-switcher"
+documentation = "https://github.com/saikhurana98/monitor-switcher"
+keywords = ["ddc", "monitor", "kde", "tray", "linux"]
+categories = ["command-line-utilities", "hardware-support"]
+rust-version = "1.80"
+exclude = ["config.yaml", "target", "/.github"]
+
+[[bin]]
+name = "monitor-switcher"
+path = "src/main.rs"
+
+[lib]
+name = "monitor_switcher"
+path = "src/lib.rs"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+ksni = { version = "0.3", features = ["blocking"] }
+serde = { version = "1", features = ["derive"] }
+serde_yml = "0.0.12"
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+tempfile = "3"
+
+[lints.rust]
+unsafe_code = "forbid"
+unused = { level = "warn", priority = -1 }
+missing_debug_implementations = "warn"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
+todo = "deny"
+unimplemented = "deny"
+dbg_macro = "deny"
+print_stdout = "allow"
+print_stderr = "allow"
+module_name_repetitions = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+multiple_crate_versions = "allow"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true

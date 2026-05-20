@@ -1,0 +1,14 @@
+[Unit]
+Description=Monitor Switcher tray daemon
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/monitor-switcher --config %h/.config/monitor-switcher/config.yaml
+Restart=on-failure
+RestartSec=3
+Environment=RUST_LOG=info
+
+[Install]
+WantedBy=graphical-session.target

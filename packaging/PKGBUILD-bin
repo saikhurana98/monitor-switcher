@@ -1,0 +1,26 @@
+# Maintainer: Sai Khurana <sai.khurana98@ashoka.edu.in>
+pkgname=monitor-switcher-bin
+_pkgname=monitor-switcher
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Auto-switch secondary monitor inputs based on a master DDC/CI display's active source (prebuilt)"
+arch=('x86_64' 'aarch64')
+url="https://github.com/saikhurana98/monitor-switcher"
+license=('MIT')
+depends=('ddcutil')
+optdepends=('systemd: user service for autostart')
+provides=("$_pkgname")
+conflicts=("$_pkgname")
+source_x86_64=("$_pkgname-$pkgver-x86_64.tar.gz::https://github.com/saikhurana98/monitor-switcher/releases/download/v$pkgver/monitor-switcher-x86_64-unknown-linux-gnu.tar.gz")
+source_aarch64=("$_pkgname-$pkgver-aarch64.tar.gz::https://github.com/saikhurana98/monitor-switcher/releases/download/v$pkgver/monitor-switcher-aarch64-unknown-linux-gnu.tar.gz")
+sha256sums_x86_64=('SKIP')
+sha256sums_aarch64=('SKIP')
+
+package() {
+    cd "$_pkgname"
+    install -Dm755 "$_pkgname" "$pkgdir/usr/bin/$_pkgname"
+    install -Dm644 "systemd/$_pkgname.service" "$pkgdir/usr/lib/systemd/user/$_pkgname.service"
+    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
+    install -Dm644 README.md "$pkgdir/usr/share/doc/$_pkgname/README.md"
+    install -Dm644 config.example.yaml "$pkgdir/usr/share/doc/$_pkgname/config.example.yaml"
+}
