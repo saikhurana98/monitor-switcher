@@ -10,7 +10,7 @@ depends=('ddcutil')
 makedepends=('cargo')
 optdepends=('systemd: user service for autostart')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/saikhurana98/monitor-switcher/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('23e4383e1b8890c841be93487838e275bd7c9fb90e74c57e28d9fd5dd2113d22')
 
 prepare() {
     cd "$pkgname-$pkgver"
